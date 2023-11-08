@@ -10,11 +10,11 @@ function App() {
 
   const handleAddTodo = () => {
     const name = todoNameRef.current.value; // inputの値を保持
-    const id = uuidv4();
+    
 
     if (name === "" ) return;
     setTodos((prevTodos) => {
-      return [...prevTodos,{id, name, completed: false}]
+      return [...prevTodos,{id: uuidv4(), name, completed: false}]
     })
     todoNameRef.current.value = '';
   };
@@ -30,7 +30,7 @@ function App() {
     <div>
 
       <TodoList todos={todos} toggleTodo={toggleTodo} />
-      <input ref={todoNameRef} />
+      <input ref={todoNameRef} type="text" />
       <button onClick={handleAddTodo}>追加</button>
 
     </div>

@@ -1,23 +1,18 @@
-import React from 'react'
+import React from 'react';
 
-const Todo = ({ todo, toggleTodo}) => {
-
+const Todo = ({ todo, toggleTodo }) => {
   const handleTodoClick = () => {
     toggleTodo(todo.id);
-  }
-
+  };
 
   return (
-    <div>
+    <li>
       <label>
-        <input
-          type="checkbox"   
-          checked={todo.completed} 
-          onChange={handleTodoClick} 
-        />
+        <input type="checkbox" checked={todo.completed} onChange={handleTodoClick} />
+        {todo.name}
       </label>
-    </div>
-  )
+    </li>
+  );
+};
 
-}
-export default Todo
+export default Todo;
