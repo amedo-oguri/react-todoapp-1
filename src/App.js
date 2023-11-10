@@ -25,6 +25,10 @@ function App() {
       ))
   }
 
+  const handleDeleteCompleted = () => {
+    setTodos(todos => todos.filter(todo => !todo.completed))
+  }
+
 
   return (
     <div>
@@ -32,7 +36,9 @@ function App() {
       <TodoList todos={todos} toggleTodo={toggleTodo} />
       <input ref={todoNameRef} type="text" />
       <button onClick={handleAddTodo}>追加</button>
-
+      <button onClick={handleDeleteCompleted} >
+        完了タスクを削除
+      </button>
     </div>
   );
 }
