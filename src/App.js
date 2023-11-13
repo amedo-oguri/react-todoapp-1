@@ -7,6 +7,11 @@ function App() {
 //タスク追加用の変数を作成
   const [todos, setTodos] = useState([]);
   const todoNameRef = useRef(null);
+  const [isAllChecked, setIsAllChecked] = useState(false);
+
+  const handleSelectAll = () => {
+    
+  }
 
   const handleAddTodo = () => {
     const name = todoNameRef.current.value; // inputの値を保持
