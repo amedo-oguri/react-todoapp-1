@@ -7,7 +7,6 @@ function App() {
 //タスク追加用の変数を作成
   const [todos, setTodos] = useState([]);
   const todoNameRef = useRef(null);
-  const [isAllChecked, setIsAllChecked] = useState(false);
 
   const handleAddTodo = () => {
     const name = todoNameRef.current.value; // inputの値を保持
@@ -32,12 +31,11 @@ function App() {
 
   const handleSelectAll = () => {
     // todos配列の中の投稿内容の完了状態が同じか確認
-    const localIsAllChecked = todos.every((todo) => todo.completed);
+    const isAllChecked = todos.every((todo) => todo.completed);
     const updatedTodos = todos.map(todo => ({
       ...todo,
-      completed: localIsAllChecked
+      completed: !isAllChecked
     }));
-    setTodos(updatedTodos);
   };
 
   return (
@@ -46,6 +44,7 @@ function App() {
       <TodoList todos={todos} toggleTodo={toggleTodo} />
       <input ref={todoNameRef} type="text" />
       <button onClick={handleAddTodo}>追加</button>
+      <SelectAllCheckbox handleSelectAll={handleSelectAll} />
       <button onClick={handleDeleteCompleted} >
         完了タスクを削除
       </button>
