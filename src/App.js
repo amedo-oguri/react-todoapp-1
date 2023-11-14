@@ -9,10 +9,6 @@ function App() {
   const todoNameRef = useRef(null);
   const [isAllChecked, setIsAllChecked] = useState(false);
 
-  const handleSelectAll = () => {
-    
-  }
-
   const handleAddTodo = () => {
     const name = todoNameRef.current.value; // inputの値を保持
     
@@ -34,6 +30,15 @@ function App() {
     setTodos(todos => todos.filter(todo => !todo.completed))
   }
 
+  const handleSelectAll = () => {
+    // todos配列の中の投稿内容の完了状態が同じか確認
+    const localIsAllChecked = todos.every((todo) => todo.completed);
+    const updatedTodos = todos.map(todo => ({
+      ...todo,
+      completed: localIsAllChecked
+    }));
+    setTodos(updatedTodos);
+  };
 
   return (
     <div>
