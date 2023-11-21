@@ -1,6 +1,8 @@
 import { useState, useRef } from "react";
 import { v4 as uuidv4 } from "uuid"; // idを割り当てる
 import TodoList  from "./TodoList";
+import SelectAllCheckbox from './SelectAllCheckbox';
+
 
 
 function App() {
@@ -10,8 +12,6 @@ function App() {
 
   const handleAddTodo = () => {
     const name = todoNameRef.current.value; // inputの値を保持
-    
-
     if (name === "" ) return;
     setTodos((prevTodos) => {
       return [...prevTodos,{id: uuidv4(), name, completed: false}]
@@ -32,10 +32,9 @@ function App() {
   const handleSelectAll = () => {
     // todos配列の中の投稿内容の完了状態が同じか確認
     const isAllChecked = todos.every((todo) => todo.completed);
-    const updatedTodos = todos.map(todo => ({
-      ...todo,
-      completed: !isAllChecked
-    }));
+    setTodos(todos.map((todo) => ({...
+      todo, completed: !isAllChecked
+    })));
   };
 
   return (
@@ -44,7 +43,7 @@ function App() {
       <TodoList todos={todos} toggleTodo={toggleTodo} />
       <input ref={todoNameRef} type="text" />
       <button onClick={handleAddTodo}>追加</button>
-      <SelectAllCheckbox handleSelectAll={handleSelectAll} />
+      <SelectAllCheckbox todos={todos} handleSelectAll={handleSelectAll} />
       <button onClick={handleDeleteCompleted} >
         完了タスクを削除
       </button>
