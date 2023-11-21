@@ -19,6 +19,13 @@ function App() {
     todoNameRef.current.value = '';
   };
 
+      // Enterでタスク追加
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleAddTodo();
+    }
+  };
+
   const toggleTodo = id => {
     setTodos(todos => todos.map(todo =>
       todo.id === id? {...todo, completed: !todo.completed}:todo
@@ -41,7 +48,7 @@ function App() {
     <div>
 
       <TodoList todos={todos} toggleTodo={toggleTodo} />
-      <input ref={todoNameRef} type="text" />
+      <input ref={todoNameRef} type="text" onKeyDown={handleKeyDown}/>
       <button onClick={handleAddTodo}>追加</button>
       <SelectAllCheckbox todos={todos} handleSelectAll={handleSelectAll} />
       <button onClick={handleDeleteCompleted} >
