@@ -10,7 +10,6 @@ function App() {
   const [todos, setTodos] = useState([]);
   const todoNameRef = useRef(null);
   const [sortOrder, setSortOrder] = useState("asc"); // 初期値：昇順
-  const [sortedTodos, setSortedTodos] = useState([]);
 
   const handleAddTodo = () => {
     const name = todoNameRef.current.value;
@@ -54,6 +53,9 @@ function App() {
       <TodoList todos={todos} toggleTodo={toggleTodo} sortOrder={sortOrder} />
       <input ref={todoNameRef} type="text" onKeyDown={handleKeyDown}/>
       <button onClick={handleAddTodo}>追加</button>
+      <button onClick={toggleSortOrder}>
+        {sortOrder === "asc" ? "`降順" : "昇順"}
+      </button>
       <SelectAllCheckbox todos={todos} handleSelectAll={handleSelectAll} />
       <button onClick={handleDeleteCompleted} >
         完了タスクを削除
