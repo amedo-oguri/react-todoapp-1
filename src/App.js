@@ -53,7 +53,7 @@ function App() {
     <div>
       <TodoList todos={todos} toggleTodo={toggleTodo} sortOrder={sortOrder} />
       <input ref={todoNameRef} type="text" onKeyDown={handleKeyDown}/>
-      <input type="date" onChange={(e) => setTaskDeadline(e.target.value)}
+      <input type="date" onChange={(e) => setTaskDeadline(e.target.value)}/>
       <button onClick={handleAddTodo}>追加</button>
       <button onClick={toggleSortOrder}>
         {sortOrder === "asc" ? "`降順" : "昇順"}
