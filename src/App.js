@@ -9,7 +9,8 @@ function App() {
 //タスク追加用の変数を作成
   const [todos, setTodos] = useState([]);
   const todoNameRef = useRef(null);
-  const [sortOrder, setSortOrder] = useState("asc"); // 初期値：昇順
+  const [sortOrder, setSortOrder] = useState("asc");
+  const [taskDeadline, setTaskDeadline] = useState(null); // 初期値：空欄
 
   const handleAddTodo = () => {
     const name = todoNameRef.current.value;
@@ -52,6 +53,7 @@ function App() {
     <div>
       <TodoList todos={todos} toggleTodo={toggleTodo} sortOrder={sortOrder} />
       <input ref={todoNameRef} type="text" onKeyDown={handleKeyDown}/>
+      <input type="date" onChange={(e) => setTaskDeadline(e.target.value)}
       <button onClick={handleAddTodo}>追加</button>
       <button onClick={toggleSortOrder}>
         {sortOrder === "asc" ? "`降順" : "昇順"}
