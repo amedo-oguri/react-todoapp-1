@@ -16,7 +16,12 @@ function App() {
     const name = todoNameRef.current.value;
     if (name === "" ) return;
     setTodos((prevTodos) => {
-      return [...prevTodos,{id: uuidv4(), name, completed: false}]
+      return [...prevTodos,
+        {id: uuidv4(),
+           name,
+           completed: false, 
+           deadline: new Date(deadline)
+      }]
     })
     todoNameRef.current.value = '';
   };

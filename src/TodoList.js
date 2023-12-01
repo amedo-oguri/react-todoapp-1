@@ -7,8 +7,19 @@ const TodoList = ({todos, toggleTodo, sortOrder}) => {
 
   useEffect(() => {
     const sorted = [...todos].sort((a,b) => {
-      return sortOrder === "asc" ? 
-      a.name.localeCompare(b.name) : b.name.localeCompare(a.name)
+      // 名前でソート
+      const nameCompare = sortOrder === "asc" ?
+      a.name.localeCompare(b.name)
+      : b.name.localeCompare(a.name);
+
+      //期限が設定されている場合のみ期限で比較
+      if (a.deadline && b.deadline) {
+        const deadlineA = new Date(a.deadline);
+        const deadlineB = new Date(b.deadline);
+        return deadlineA - deadlineB || nameCompare;
+      }
+
+      return nameCompare;
     });
 
     setSortedTodos(sorted);
