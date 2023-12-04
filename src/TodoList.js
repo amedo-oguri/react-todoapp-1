@@ -16,7 +16,8 @@ const TodoList = ({todos, toggleTodo, sortOrder}) => {
       if (a.deadline && b.deadline) {
         const deadlineA = new Date(a.deadline);
         const deadlineB = new Date(b.deadline);
-        return deadlineA - deadlineB || nameCompare;
+        // 期限が同じ場合は名前でソート
+        return deadlineA - deadlineB || nameCompare; 
       }
 
       return nameCompare;
@@ -24,7 +25,8 @@ const TodoList = ({todos, toggleTodo, sortOrder}) => {
 
     setSortedTodos(sorted);
 
-  }, [todos, sortOrder]); // todosまたはsortOrderが変更された場合にのみ実行
+  // todosまたはsortOrderが変更された場合にのみ実行
+  }, [todos, sortOrder]); 
 
 
   return (

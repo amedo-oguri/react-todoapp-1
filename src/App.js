@@ -20,10 +20,11 @@ function App() {
         {id: uuidv4(),
            name,
            completed: false, 
-           deadline: new Date(deadline)
+           deadline: taskDeadline ? new Date(taskDeadline) : null
       }]
     })
     todoNameRef.current.value = '';
+    setTaskDeadline(null); // 日付入力フィールドをクリア
   };
 
   
@@ -61,7 +62,7 @@ function App() {
       <input type="date" onChange={(e) => setTaskDeadline(e.target.value)}/>
       <button onClick={handleAddTodo}>追加</button>
       <button onClick={toggleSortOrder}>
-        {sortOrder === "asc" ? "`降順" : "昇順"}
+        {sortOrder === "asc" ? "降順" : "昇順"}
       </button>
       <SelectAllCheckbox todos={todos} handleSelectAll={handleSelectAll} />
       <button onClick={handleDeleteCompleted} >
