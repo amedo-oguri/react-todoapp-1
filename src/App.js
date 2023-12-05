@@ -12,7 +12,8 @@ function App() {
   const [sortOrder, setSortOrder] = useState("asc");
   const [taskDeadline, setTaskDeadline] = useState(null); // 初期値：空欄
 
-  const handleAddTodo = () => {
+  const handleAddTodo = (e) => {
+    if(e) e.preventDefault(); // イベントがある場合だけフォームのデフォルト送信を防止する
     const name = todoNameRef.current.value;
     if (name === "" ) {
       alert("タスク名を入力して下さい");
@@ -34,7 +35,8 @@ function App() {
   
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
-      handleAddTodo();
+      handleAddTodo(e);
+      todoNameRef.current.focus();
     }
   };
 
@@ -63,7 +65,7 @@ function App() {
     <div>
       <TodoList todos={todos} toggleTodo={toggleTodo} sortOrder={sortOrder} />
       <input ref={todoNameRef} type="text" onKeyDown={handleKeyDown}/>
-      <input type="date" value={taskDeadline || ''} onChange={(e) => setTaskDeadline(e.target.value)}/>
+      <input type="date" value={taskDeadline || ''} onChange={(e) => setTaskDeadline(e.target.value)} onKeyDown={handleKeyDown}/>
       <button onClick={handleAddTodo}>追加</button>
       <button onClick={toggleSortOrder}>
         {sortOrder === "asc" ? "降順" : "昇順"}
