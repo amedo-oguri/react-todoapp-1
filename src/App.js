@@ -14,7 +14,11 @@ function App() {
 
   const handleAddTodo = () => {
     const name = todoNameRef.current.value;
-    if (name === "" ) return;
+    if (name === "" ) {
+      alert("タスク名を入力して下さい");
+      return;
+    }
+
     setTodos((prevTodos) => {
       return [...prevTodos,
         {id: uuidv4(),
@@ -23,7 +27,7 @@ function App() {
            deadline: taskDeadline ? new Date(taskDeadline) : null
       }]
     })
-    todoNameRef.current.value = '';
+    todoNameRef.current.value = ' ';
     setTaskDeadline(null); // 日付入力フィールドをクリア
   };
 
@@ -46,8 +50,8 @@ function App() {
 
   const handleSelectAll = () => {
     const isAllChecked = todos.every((todo) => todo.completed);
-    setTodos(todos.map((todo) => ({...
-      todo, completed: !isAllChecked
+    setTodos(todos.map((todo) => ({...todo,
+      completed: !isAllChecked
     })));
   };
 
@@ -59,7 +63,7 @@ function App() {
     <div>
       <TodoList todos={todos} toggleTodo={toggleTodo} sortOrder={sortOrder} />
       <input ref={todoNameRef} type="text" onKeyDown={handleKeyDown}/>
-      <input type="date" onChange={(e) => setTaskDeadline(e.target.value)}/>
+      <input type="date" value={taskDeadline || ''} onChange={(e) => setTaskDeadline(e.target.value)}/>
       <button onClick={handleAddTodo}>追加</button>
       <button onClick={toggleSortOrder}>
         {sortOrder === "asc" ? "降順" : "昇順"}

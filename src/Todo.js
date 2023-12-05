@@ -5,12 +5,17 @@ const Todo = ({ todo, toggleTodo }) => {
     toggleTodo(todo.id);
   };
 
+  const formatDate = (dateString) => {
+    return dateString ? new Date(dateString).toLocaleDateString() : '期限なし';
+  };
+
   return (
     <li>
       <label>
         <input type="checkbox" checked={todo.completed} onChange={handleTodoClick} />
         {todo.name}
       </label>
+      { todo.deadline && <span> - 期限: {formatDate(todo.deadline)}</span>}
     </li>
   );
 };
